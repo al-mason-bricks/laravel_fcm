@@ -1,9 +1,12 @@
 import 'package:mason/mason.dart';
+import 'dependency_handler/package_installation_handler.dart';
 
-void run(HookContext context) {
-  context.logger
-      .warn('You need to add HasFirebaseTokens trait to app/Models/User model');
-  context.logger.warn('You need to run this command:');
-  context.logger.warn('composer require kutia-software-company/larafirebase');
-  context.logger.warn('don\'t forget to add FCM_KEY to your .env file');
+void run(HookContext context) async {
+  PackageInstallationHandler packageInstallationHandler =
+      PackageInstallationHandler(
+    hookContext: context,
+  );
+  await packageInstallationHandler.installPackages();
+
+  context.logger.warn('don\'t forget to read fcm.md');
 }
